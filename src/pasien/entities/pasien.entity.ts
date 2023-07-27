@@ -1,4 +1,5 @@
-import { Dokter } from 'src/dokter/entities/dokter.entity';
+import { Praktek } from 'src/dokter/entities/praktek.entity';
+
 import {
   Column,
   CreateDateColumn,
@@ -23,9 +24,21 @@ export class Pasien {
   @Column()
   phonenumber?: number;
 
-  @ManyToOne(() => Dokter, (dokter) => dokter.id)
+  @Column()
+  tanggal_lahir?: Date;
+
+  @Column()
+  tinggi?: number;
+
+  @Column()
+  berat_badan?: number;
+
+  @Column()
+  diagnosa?: string;
+
+  @ManyToOne(() => Praktek, (praktek) => praktek.id)
   @JoinColumn()
-  dokter: Dokter;
+  praktek: Praktek;
 
   @CreateDateColumn()
   created_at: Date;

@@ -1,7 +1,10 @@
+import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -21,7 +24,11 @@ export class Dokter {
   phonenumber?: number;
 
   @Column()
-  specialist: string;
+  specialist?: string;
+
+  @OneToOne(() => User)
+  @JoinColumn()
+  user?: User;
 
   @CreateDateColumn()
   created_at: Date;

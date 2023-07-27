@@ -1,31 +1,36 @@
-import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Apoteker {
+export class Obat {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  fullname: string;
+  nama_obat: string;
 
   @Column()
-  email?: string;
+  kandungan_obat: string;
 
   @Column()
-  phonenumber?: number;
+  merek_obat: string;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  user?: User;
+  @Column()
+  stock_obat: number;
+
+  @Column()
+  satuan_obat: string;
+
+  @Column()
+  harga_beli: number;
+
+  @Column()
+  harga_jual: number;
 
   @CreateDateColumn()
   created_at: Date;

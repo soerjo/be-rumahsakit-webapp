@@ -1,38 +1,32 @@
 import { Pasien } from 'src/pasien/entities/pasien.entity';
-
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Dokter } from './dokter.entity';
+import { Obat } from './obat.entity';
 
 @Entity()
-export class Diagnosa {
+export class Resep {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToMany(() => Pasien)
+  @ManyToOne(() => Pasien, (pasien) => pasien.id)
   @JoinColumn()
   pasien: Pasien;
 
-  @ManyToOne(() => Dokter, (dokter) => dokter.id)
-  @JoinColumn()
-  dokter: Dokter;
+  @Column()
+  kandungan_obat: string;
 
   @Column()
-  diagnosa: string;
+  dosis_obat: number;
 
   @Column()
-  praktek: string;
-
-  @Column()
-  specialist: string;
+  satuan_obat: string;
 
   @CreateDateColumn()
   created_at: Date;
