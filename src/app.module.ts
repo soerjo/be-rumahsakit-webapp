@@ -15,6 +15,7 @@ import { User } from './user/entities/user.entity';
 import { Diagnosa } from './dokter/entities/diagnosa.entity';
 import { Dokter } from './dokter/entities/dokter.entity';
 import { ApotekerModule } from './apoteker/apoteker.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ApotekerModule } from './apoteker/apoteker.module';
     TagihanModule,
     DokterModule,
     ApotekerModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],
