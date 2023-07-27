@@ -1,16 +1,13 @@
-import { Dokter } from 'src/dokter/entities/dokter.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Pasien {
+export class Dokter {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,9 +20,8 @@ export class Pasien {
   @Column()
   phonenumber?: number;
 
-  @ManyToOne(() => Dokter, (dokter) => dokter.id)
-  @JoinColumn()
-  dokter: Dokter;
+  @Column()
+  specialist: string;
 
   @CreateDateColumn()
   created_at: Date;

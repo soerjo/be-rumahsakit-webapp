@@ -1,4 +1,3 @@
-import { Dokter } from 'src/dokter/entities/dokter.entity';
 import {
   Column,
   CreateDateColumn,
@@ -8,24 +7,22 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Dokter } from './dokter.entity';
 
 @Entity()
-export class Pasien {
+export class Praktek {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  fullname: string;
-
-  @Column()
-  email?: string;
-
-  @Column()
-  phonenumber?: number;
+  nama_praktek: string;
 
   @ManyToOne(() => Dokter, (dokter) => dokter.id)
   @JoinColumn()
   dokter: Dokter;
+
+  @Column()
+  biaya: number;
 
   @CreateDateColumn()
   created_at: Date;
