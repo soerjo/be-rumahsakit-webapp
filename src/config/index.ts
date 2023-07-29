@@ -3,6 +3,6 @@ export const jwtconstant = {
 };
 
 export const rootUser = {
-  username: 'rahasiaroot',
-  password: 'superduperrahasiacuy',
+  username: process.env.ROOT_USERNAME,
+  password: process.env.ROOT_PASSWORD,
 };
