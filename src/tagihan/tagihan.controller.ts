@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TagihanService } from './tagihan.service';
 import { CreateTagihanDto } from './dto/create-tagihan.dto';
 import { UpdateTagihanDto } from './dto/update-tagihan.dto';

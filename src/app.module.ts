@@ -1,7 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -22,6 +19,7 @@ import { Resep } from './apoteker/entities/resep.entity';
 import { Praktek } from './dokter/entities/praktek.entity';
 import { Pasien } from './pasien/entities/pasien.entity';
 import { AuthModule } from './auth/auth.module';
+import { Admin } from './admin/entities/admin.entity';
 
 @Module({
   imports: [
@@ -42,6 +40,7 @@ import { AuthModule } from './auth/auth.module';
         Obat,
         Resep,
         Pasien,
+        Admin,
       ],
       synchronize: true,
     }),
@@ -54,7 +53,5 @@ import { AuthModule } from './auth/auth.module';
     AdminModule,
     AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

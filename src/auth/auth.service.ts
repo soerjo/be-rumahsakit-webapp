@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { rootUser } from 'src/config';
 import { UserService } from 'src/user/user.service';
 import { compareEncryptString } from 'src/util/encrypt.util';
 
@@ -12,7 +11,10 @@ export class AuthService {
   ) {}
 
   async signin(username: string, password: string): Promise<any> {
-    if (username === rootUser.username && password === rootUser.password) {
+    if (
+      username === process.env.ROOT_USERNAME &&
+      password === process.env.ROOT_PASSWORD
+    ) {
       const payload = {
         sub: '00000000',
         username: 'super_root',

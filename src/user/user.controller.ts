@@ -21,7 +21,6 @@ export class UserController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto, @Request() req) {
-    console.log({ jwtPayload: req?.user });
     return this.userService.create(createUserDto);
   }
 

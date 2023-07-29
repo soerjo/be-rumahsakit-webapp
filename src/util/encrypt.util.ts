@@ -1,9 +1,8 @@
 import * as bcrypt from 'bcrypt';
 
-const saltOrRounds = 10;
-
 export function encryptString(plain: string) {
-  return bcrypt.hashSync(plain, saltOrRounds);
+  const salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(plain, salt);
 }
 
 export function compareEncryptString(plain = '', hashString = '') {

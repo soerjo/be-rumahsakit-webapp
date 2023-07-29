@@ -9,6 +9,11 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+export enum AdminRole {
+  SUPER = 'SUPER_ADMIN',
+  ADMIN = 'ADMIN',
+}
+
 @Entity()
 export class Admin {
   @PrimaryGeneratedColumn('uuid')
@@ -21,6 +26,12 @@ export class Admin {
   email?: string;
 
   @Column()
+  tanggal_lahir: Date;
+
+  @Column()
+  role_admin?: AdminRole;
+
+  @Column({ type: 'bigint' })
   phonenumber?: number;
 
   @OneToOne(() => User)
