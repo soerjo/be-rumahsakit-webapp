@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [ConfigModule, TypeOrmModule.forFeature([User]), JwtModule],
-  // controllers: [UserController],
+  controllers: [UserController],
   providers: [UserService],
   exports: [UserService],
 })

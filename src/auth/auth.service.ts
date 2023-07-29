@@ -21,15 +21,19 @@ export class AuthService {
         role: 'SUPER_ROOT',
       };
 
-      return { access_token: await this.jwtService.signAsync(payload) };
+      return {
+        access_token: await this.jwtService.signAsync(payload),
+        payload,
+      };
     }
 
     const user = await this.userService.findUser(username);
-    if (!user && !compareEncryptString(password, user?.password))
-      throw new UnauthorizedException();
+    const isPasswordTrue = compareEncryptString(password, user?.password);
+    console.log({ user, isPasswordTrue });
+    if (!user || !isPasswordTrue) throw new UnauthorizedException();
 
     const payload = { sub: user.id, username: user.username, role: user.role };
 
-    return { access_token: await this.jwtService.signAsync(payload) };
+    return { access_token: await this.jwtService.signAsync(payload), payload };
   }
 }

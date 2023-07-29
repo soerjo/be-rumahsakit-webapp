@@ -22,7 +22,7 @@ export class AdminService {
     return (
       username.toLowerCase() +
       new Date(birth).getDate().toString().padStart(2, '0') +
-      new Date(birth).getMonth().toString().padStart(2, '0') +
+      (new Date(birth).getMonth() + 1).toString().padStart(2, '0') +
       new Date(birth).getFullYear().toString()
     );
   }
@@ -52,7 +52,7 @@ export class AdminService {
   }
 
   findAll() {
-    return `This action returns all admin`;
+    return this.adminRepo.find();
   }
 
   findOne(id: number) {

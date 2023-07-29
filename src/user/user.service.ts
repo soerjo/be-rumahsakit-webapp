@@ -22,6 +22,7 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto) {
+    console.log({ password: createUserDto.password });
     createUserDto.password = encryptString(createUserDto.password);
 
     const getUser = await this.findUser(createUserDto.username);
@@ -37,7 +38,7 @@ export class UserService {
   }
 
   findAll() {
-    return `This action returns all user`;
+    return this.usersRepository.find();
   }
 
   findOne(id: number) {
