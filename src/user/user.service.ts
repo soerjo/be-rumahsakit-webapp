@@ -17,12 +17,18 @@ export class UserService {
     return await this.usersRepository.findOne({ where: { username } });
   }
 
+  async findByEmail(email: string) {
+    return await this.usersRepository.findOne({ where: { email } });
+  }
+
   async create(createUserDto: CreateUserDto) {
     createUserDto.password = encryptString(createUserDto.password);
 
     const getUser = await this.findUser(createUserDto.username);
-    console.log({ getUser });
     if (getUser) throw new BadRequestException('user already exists');
+
+    const getUserByEmail = await this.findByEmail(createUserDto.email);
+    if (getUserByEmail) throw new BadRequestException('email already exists');
 
     let user = await this.usersRepository.create(createUserDto);
     user = await this.usersRepository.save(user);
