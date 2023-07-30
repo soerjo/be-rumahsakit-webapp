@@ -1,3 +1,4 @@
+import { SatuanObat } from 'src/obat/entities/obat.entity';
 import { Pasien } from 'src/pasien/entities/pasien.entity';
 import {
   Column,
@@ -8,7 +9,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Obat } from './obat.entity';
 
 @Entity()
 export class Resep {
@@ -23,10 +23,10 @@ export class Resep {
   kandungan_obat: string;
 
   @Column()
-  dosis_obat: number;
+  qty_obat: number;
 
   @Column()
-  satuan_obat: string;
+  satuan_obat: SatuanObat;
 
   @CreateDateColumn()
   created_at: Date;

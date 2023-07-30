@@ -19,22 +19,22 @@ Simple hospital web app systems. the main think of this app is to simplify the f
 | /admin ✅
 
 - crud admin ✅
-- registrasi pasien
-- get list passien
+- registrasi pasien ✅
+- get list passien ✅
 - get tagihan passien
 
 | /dokter
 
-- crud dokter
-- get list passien
-- input praktek dokter
+- crud dokter ✅
+- get list passien ✅
+- input praktek dokter ✅
 - input resep obat
 - update data passien ["diagnosa", "tinggi", "berat", "dll"]
 
 | /praktek
 
-- crud praktek
-- get list praktek
+- crud praktek ✅
+- get list praktek ✅
 
 | /apoteker
 
