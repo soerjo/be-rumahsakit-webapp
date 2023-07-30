@@ -16,7 +16,7 @@ import { Apoteker } from './apoteker/entities/apoteker.entity';
 import { ObatKeluar } from './apoteker/entities/obat_keluar.entity';
 import { Obat } from './apoteker/entities/obat.entity';
 import { Resep } from './apoteker/entities/resep.entity';
-import { Praktek } from './dokter/entities/praktek.entity';
+import { Praktek } from './praktek/entities/praktek.entity';
 import { Pasien } from './pasien/entities/pasien.entity';
 import { AuthModule } from './auth/auth.module';
 import { Admin } from './admin/entities/admin.entity';
