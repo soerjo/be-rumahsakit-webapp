@@ -8,13 +8,14 @@ import {
   MaxLength,
 } from 'class-validator';
 import { AdminRole } from '../entities/admin.entity';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAdminDto {
   @IsString()
   @MaxLength(50)
   @IsNotEmpty()
+  @Transform((o) => o.value.toString().toLocaleLowerCase())
   @ApiProperty({ example: 'suryo hastomo' })
   fullname: string;
 
@@ -26,6 +27,7 @@ export class CreateAdminDto {
 
   @IsEmail()
   @IsNotEmpty()
+  @Transform((o) => o.value.toString().toLocaleLowerCase())
   @ApiProperty({ example: 'ryohastomo@mail.com' })
   email: string;
 

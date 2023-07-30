@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsDate,
   IsEmail,
@@ -12,12 +12,14 @@ import {
 export class CreateDokterDto {
   @IsString()
   @IsNotEmpty()
+  @Transform((o) => o.value.toString().toLocaleLowerCase())
   @ApiProperty({ example: 'suryo hastomo' })
   fullname: string;
 
   @IsEmail()
   @IsNotEmpty()
   @ValidateIf((o) => !o.phonenumber || o.email)
+  @Transform((o) => o.value.toString().toLocaleLowerCase())
   @ApiProperty({ example: 'suryo@mail.com' })
   email?: string;
 
@@ -29,6 +31,7 @@ export class CreateDokterDto {
 
   @IsString()
   @IsNotEmpty()
+  @Transform((o) => o.value.toString().toLocaleLowerCase())
   @ApiProperty({ example: 'Dokter Umum' })
   specialist?: string;
 

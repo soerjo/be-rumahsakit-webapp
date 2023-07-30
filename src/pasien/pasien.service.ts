@@ -29,7 +29,7 @@ export class PasienService {
   }
 
   findAll() {
-    return this.pasienRepository.find();
+    return this.pasienRepository.find({ relations: { praktek: true } });
   }
 
   findOne(id: string) {
@@ -37,6 +37,7 @@ export class PasienService {
   }
 
   async update(id: string, updatePasienDto: UpdatePasienDto) {
+    console.log({ updatePasienDto });
     const pasien = await this.pasienRepository.findOne({
       where: { id },
       relations: { praktek: true },
