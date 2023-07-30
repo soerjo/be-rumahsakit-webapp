@@ -31,6 +31,11 @@ Simple hospital web app systems. the main think of this app is to simplify the f
 - input resep obat
 - update data passien ["diagnosa", "tinggi", "berat", "dll"]
 
+| /praktek
+
+- crud praktek
+- get list praktek
+
 | /apoteker
 
 - crud apoteker

@@ -26,6 +26,9 @@ export class Dokter {
   @Column()
   specialist?: string;
 
+  @Column()
+  tanggal_lahir: Date;
+
   @OneToOne(() => User)
   @JoinColumn()
   user?: User;
