@@ -32,16 +32,16 @@ export class PasienController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.pasienService.findOne(+id);
+    return this.pasienService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePasienDto: UpdatePasienDto) {
-    return this.pasienService.update(+id, updatePasienDto);
+    return this.pasienService.update(id, updatePasienDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.pasienService.remove(+id);
+    return this.pasienService.remove(id);
   }
 }

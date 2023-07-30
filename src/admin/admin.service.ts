@@ -33,10 +33,10 @@ export class AdminService {
   }
 
   async create(createAdminDto: CreateAdminDto) {
-    const username = createAdminDto.fullname.split(' ')[0];
+    const username = 'amdin-' + createAdminDto.fullname.split(' ')[0];
     const password = this.createSimplePassword(
       new Date(createAdminDto.tanggal_lahir),
-      username,
+      createAdminDto.fullname.split(' ')[0],
     );
 
     const user = await this.userService.create({

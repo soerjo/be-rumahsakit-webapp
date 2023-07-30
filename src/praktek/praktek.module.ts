@@ -10,5 +10,6 @@ import { DokterModule } from 'src/dokter/dokter.module';
   imports: [TypeOrmModule.forFeature([Praktek]), JwtModule, DokterModule],
   controllers: [PraktekController],
   providers: [PraktekService],
+  exports: [PraktekService],
 })
 export class PraktekModule {}

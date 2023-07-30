@@ -39,7 +39,7 @@ export class DokterService {
     const username = 'dokter-' + createDokterDto.fullname.split(' ')[0];
     const password = this.createSimplePassword(
       new Date(createDokterDto.tanggal_lahir),
-      username,
+      createDokterDto.fullname.split(' ')[0],
     );
 
     const user = await this.userService.create({

@@ -4,6 +4,7 @@ import {
   IsDate,
   IsEmail,
   IsNotEmpty,
+  IsNumber,
   IsString,
   ValidateIf,
 } from 'class-validator';
@@ -11,24 +12,24 @@ import {
 export class CreateDokterDto {
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ example: '' })
+  @ApiProperty({ example: 'suryo hastomo' })
   fullname: string;
 
   @IsEmail()
   @IsNotEmpty()
   @ValidateIf((o) => !o.phonenumber || o.email)
-  @ApiProperty({ example: '' })
+  @ApiProperty({ example: 'suryo@mail.com' })
   email?: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   @ValidateIf((o) => !o.email || o.phonenumber)
-  @ApiProperty({ example: '' })
+  @ApiProperty({ example: 87808295838 })
   phonenumber?: number;
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ example: '' })
+  @ApiProperty({ example: 'Dokter Umum' })
   specialist?: string;
 
   @IsDate()

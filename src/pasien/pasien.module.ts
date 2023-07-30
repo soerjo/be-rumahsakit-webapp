@@ -4,9 +4,10 @@ import { PasienController } from './pasien.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Pasien } from './entities/pasien.entity';
+import { PraktekModule } from 'src/praktek/praktek.module';
 
 @Module({
-  imports: [JwtModule, TypeOrmModule.forFeature([Pasien])],
+  imports: [JwtModule, TypeOrmModule.forFeature([Pasien]), PraktekModule],
   controllers: [PasienController],
   providers: [PasienService],
 })
