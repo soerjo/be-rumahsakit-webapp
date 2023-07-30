@@ -2,13 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsDate,
-  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
   ValidateIf,
 } from 'class-validator';
-import { Praktek } from 'src/praktek/entities/praktek.entity';
 
 export class UpdatePasienDto {
   @IsOptional()
