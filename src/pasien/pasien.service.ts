@@ -37,22 +37,31 @@ export class PasienService {
   }
 
   async update(id: string, updatePasienDto: UpdatePasienDto) {
-    const pasien = await this.pasienRepository.findOneBy({ id });
+    const pasien = await this.pasienRepository.findOne({
+      where: { id },
+      relations: { praktek: true },
+    });
 
     if (!pasien)
       return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
 
-    const getPraktek = await this.praktekService.findByName(
-      updatePasienDto.praktek,
-    );
+    if (updatePasienDto?.praktek) {
+      const praktek = await this.praktekService.findByName(
+        updatePasienDto.praktek,
+      );
 
-    if (!getPraktek)
-      return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
+      delete updatePasienDto.praktek;
+      return await this.pasienRepository.save({
+        ...pasien,
+        ...updatePasienDto,
+        praktek,
+      });
+    }
 
+    delete updatePasienDto.praktek;
     return await this.pasienRepository.save({
       ...pasien,
-      ...updatePasienDto,
-      praktek: getPraktek,
+      ...(updatePasienDto as Omit<UpdatePasienDto, 'praktek'>),
     });
   }
 

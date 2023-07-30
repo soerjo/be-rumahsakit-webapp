@@ -8,7 +8,6 @@ import {
   IsString,
   ValidateIf,
 } from 'class-validator';
-import { Praktek } from 'src/praktek/entities/praktek.entity';
 
 export class CreatePasienDto {
   @IsNotEmpty()

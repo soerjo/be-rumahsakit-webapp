@@ -54,6 +54,7 @@ export class DokterService {
       user,
     });
 
+    delete dokter.user.password;
     return dokter;
   }
 
