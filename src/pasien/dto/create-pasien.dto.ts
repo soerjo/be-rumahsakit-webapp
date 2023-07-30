@@ -53,5 +53,5 @@ export class CreatePasienDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({ example: 'konsultasi umum' })
-  praktek: Praktek;
+  praktek: string;
 }

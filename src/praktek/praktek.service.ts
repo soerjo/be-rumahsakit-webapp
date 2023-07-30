@@ -14,6 +14,10 @@ export class PraktekService {
     private dokterService: DokterService,
   ) {}
 
+  async findByName(nama_praktek: string) {
+    return this.praktekRepository.findOneBy({ nama_praktek });
+  }
+
   async create(createPraktekDto: CreatePraktekDto) {
     const dokter = await this.dokterService.findByFullname(
       createPraktekDto.dokter,

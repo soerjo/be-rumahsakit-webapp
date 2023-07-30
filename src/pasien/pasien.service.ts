@@ -1,34 +1,66 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreatePasienDto } from './dto/create-pasien.dto';
 import { UpdatePasienDto } from './dto/update-pasien.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pasien } from './entities/pasien.entity';
 import { Repository } from 'typeorm';
+import { PraktekService } from 'src/praktek/praktek.service';
 
 @Injectable()
 export class PasienService {
   constructor(
     @InjectRepository(Pasien)
-    private pasionRepository: Repository<Pasien>,
+    private pasienRepository: Repository<Pasien>,
+    private praktekService: PraktekService,
   ) {}
 
   async create(createPasienDto: CreatePasienDto) {
-    return await this.pasionRepository.save(createPasienDto);
+    const getPraktek = await this.praktekService.findByName(
+      createPasienDto.praktek,
+    );
+
+    if (!getPraktek)
+      return new HttpException('praktek is not found!', HttpStatus.NOT_FOUND);
+
+    return await this.pasienRepository.save({
+      ...createPasienDto,
+      praktek: getPraktek,
+    });
   }
 
   findAll() {
-    return `This action returns all pasien`;
+    return this.pasienRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pasien`;
+  findOne(id: string) {
+    return this.pasienRepository.findOneBy({ id });
   }
 
-  update(id: number, updatePasienDto: UpdatePasienDto) {
-    return `This action updates a #${id} pasien`;
+  async update(id: string, updatePasienDto: UpdatePasienDto) {
+    const pasien = await this.pasienRepository.findOneBy({ id });
+
+    if (!pasien)
+      return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
+
+    const getPraktek = await this.praktekService.findByName(
+      updatePasienDto.praktek,
+    );
+
+    if (!getPraktek)
+      return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
+
+    return await this.pasienRepository.save({
+      ...pasien,
+      ...updatePasienDto,
+      praktek: getPraktek,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pasien`;
+  async remove(id: string) {
+    const pasien = await this.pasienRepository.findOneBy({ id });
+    if (!pasien)
+      return new HttpException('passien is not found!', HttpStatus.NOT_FOUND);
+
+    this.pasienRepository.remove(pasien);
   }
 }
