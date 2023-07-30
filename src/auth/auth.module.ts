@@ -14,7 +14,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         global: true,
         publicKey: configService.get('PUBLIC_KEY'),
         privateKey: configService.get('PRIVATE_KEY'),
-        signOptions: { expiresIn: '1h', algorithm: 'RS256' },
+        signOptions: { expiresIn: '1d', algorithm: 'RS256' },
       }),
       inject: [ConfigService],
     }),

@@ -1,7 +1,10 @@
+import { Admin } from 'src/admin/entities/admin.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -23,11 +26,18 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column()
   role: Role;
+
+  @OneToOne(() => Admin, (admin) => admin.id, {
+    cascade: false,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn()
+  admin?: Admin;
 
   @CreateDateColumn()
   created_at: Date;

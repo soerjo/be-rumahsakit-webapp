@@ -4,11 +4,11 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class SignAuthDto {
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ example: 'admin_puskesmas' })
+  @ApiProperty({ example: 'superduperuser' })
   username: string;
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ example: 'password_rahasia' })
+  @ApiProperty({ example: 'superduperpassword' })
   password: string;
 }

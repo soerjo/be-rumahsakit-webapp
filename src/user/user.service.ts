@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,7 +18,10 @@ export class UserService {
   ) {}
 
   async findUser(username: string) {
-    return await this.usersRepository.findOne({ where: { username } });
+    return await this.usersRepository.findOne({
+      where: { username },
+      select: { password: true },
+    });
   }
 
   async findByEmail(email: string) {
@@ -22,7 +29,6 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto) {
-    console.log({ password: createUserDto.password });
     createUserDto.password = encryptString(createUserDto.password);
 
     const getUser = await this.findUser(createUserDto.username);
@@ -31,10 +37,7 @@ export class UserService {
     const getUserByEmail = await this.findByEmail(createUserDto.email);
     if (getUserByEmail) throw new BadRequestException('email already exists');
 
-    let user = await this.usersRepository.create(createUserDto);
-    user = await this.usersRepository.save(user);
-
-    return user;
+    return await this.usersRepository.save(createUserDto);
   }
 
   findAll() {
@@ -45,11 +48,23 @@ export class UserService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    updateUserDto.password = encryptString(updateUserDto.password);
+
+    const user = await this.usersRepository.findOneBy({ id });
+
+    const getUser = await this.findUser(updateUserDto.username);
+    if (getUser && getUser.username !== updateUserDto.username)
+      throw new BadRequestException('user already exists');
+
+    return await this.usersRepository.save({ ...user, ...updateUserDto });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const user = await this.usersRepository.findOne({ where: { id } });
+
+    if (!user) return new NotFoundException('data is not found!');
+
+    return this.usersRepository.remove(user);
   }
 }

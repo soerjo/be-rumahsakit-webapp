@@ -21,7 +21,7 @@ export class Pasien {
   @Column()
   email?: string;
 
-  @Column()
+  @Column({ type: 'bigint' })
   phonenumber?: number;
 
   @Column()

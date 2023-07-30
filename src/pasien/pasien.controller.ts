@@ -1,9 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { PasienService } from './pasien.service';
 import { CreatePasienDto } from './dto/create-pasien.dto';
 import { UpdatePasienDto } from './dto/update-pasien.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('pasien')
+@UseGuards(AuthGuard)
+@ApiBearerAuth()
 export class PasienController {
   constructor(private readonly pasienService: PasienService) {}
 

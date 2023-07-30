@@ -34,7 +34,7 @@ export class Admin {
   @Column({ type: 'bigint' })
   phonenumber?: number;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, { cascade: false, onDelete: 'CASCADE' })
   @JoinColumn()
   user?: User;
 

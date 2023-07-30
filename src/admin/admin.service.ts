@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -42,11 +47,12 @@ export class AdminService {
     });
 
     createAdminDto.tanggal_lahir = new Date(createAdminDto.tanggal_lahir);
-    let admin = await this.adminRepo.create({
+    const admin = await this.adminRepo.save({
       ...createAdminDto,
       user: user,
     });
-    admin = await this.adminRepo.save(admin);
+
+    delete admin.user.password;
 
     return admin;
   }
@@ -55,15 +61,60 @@ export class AdminService {
     return this.adminRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} admin`;
+  async findOne(id: string) {
+    const admin = await this.adminRepo.findOne({
+      where: { id },
+      relations: { user: true },
+    });
+
+    if (!admin)
+      return new HttpException(
+        { status: HttpStatus.NOT_FOUND, error: 'data is not found!' },
+        HttpStatus.NOT_FOUND,
+      );
+
+    return admin;
   }
 
-  update(id: number, updateAdminDto: UpdateAdminDto) {
-    return `This action updates a #${id} admin`;
+  async update(id: string, updateAdminDto: UpdateAdminDto) {
+    let admin = await this.adminRepo.findOne({
+      where: { id },
+      relations: { user: true },
+    });
+
+    const username = updateAdminDto.fullname.split(' ')[0];
+    const password = this.createSimplePassword(
+      new Date(updateAdminDto.tanggal_lahir),
+      username,
+    );
+
+    const user = await this.userService.update(admin.user.id, {
+      username: username,
+      email: updateAdminDto.email,
+      role: Role.ADMIN,
+      password: password,
+    });
+
+    updateAdminDto.tanggal_lahir = new Date(updateAdminDto.tanggal_lahir);
+    admin = await this.adminRepo.save({
+      ...admin,
+      ...updateAdminDto,
+      user: user,
+    });
+
+    delete admin.user.password;
+    return admin;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} admin`;
+  async remove(id: string) {
+    const admin = await this.adminRepo.findOne({
+      where: { id },
+      relations: { user: true },
+    });
+
+    if (!admin) return new NotFoundException('data is not found!');
+
+    this.adminRepo.remove(admin);
+    this.userService.remove(admin.user.id);
   }
 }

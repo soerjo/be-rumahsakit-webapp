@@ -16,9 +16,9 @@ Simple hospital web app systems. the main think of this app is to simplify the f
 
 - sign ✅
 
-| /admin
+| /admin ✅
 
-- crud admin
+- crud admin ✅
 - registrasi pasien
 - get list passien
 - get tagihan passien
