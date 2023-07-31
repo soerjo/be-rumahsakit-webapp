@@ -20,8 +20,11 @@ export class Apoteker {
   @Column()
   email?: string;
 
-  @Column()
+  @Column({ type: 'bigint' })
   phonenumber?: number;
+
+  @Column()
+  tanggal_lahir: Date;
 
   @OneToOne(() => User)
   @JoinColumn()

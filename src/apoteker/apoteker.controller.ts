@@ -1,8 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ApotekerService } from './apoteker.service';
 import { CreateApotekerDto } from './dto/create-apoteker.dto';
 import { UpdateApotekerDto } from './dto/update-apoteker.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@UseGuards(AuthGuard)
+@ApiBearerAuth()
 @Controller('apoteker')
 export class ApotekerController {
   constructor(private readonly apotekerService: ApotekerService) {}
@@ -19,16 +32,19 @@ export class ApotekerController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.apotekerService.findOne(+id);
+    return this.apotekerService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApotekerDto: UpdateApotekerDto) {
-    return this.apotekerService.update(+id, updateApotekerDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateApotekerDto: UpdateApotekerDto,
+  ) {
+    return this.apotekerService.update(id, updateApotekerDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.apotekerService.remove(+id);
+    return this.apotekerService.remove(id);
   }
 }
