@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateObatkeluarDto } from './dto/create-obatkeluar.dto';
-import { UpdateObatkeluarDto } from './dto/update-obatkeluar.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ObatKeluar } from './entities/obatkeluar.entity';
 import { Repository } from 'typeorm';
@@ -31,13 +30,19 @@ export class ObatkeluarService {
           HttpStatus.NOT_FOUND,
         );
 
+      if (obat.qty_obat < create_obat_keluar.qty_obat)
+        return new HttpException(
+          `obat ${obat.id} is out of stock!`,
+          HttpStatus.NOT_FOUND,
+        );
+
       allResep.push({
         pasien: pasien,
         nama_obat: obat.merek_obat,
         kandungan_obat: obat.kandungan_obat,
         merek_obat: obat.merek_obat,
         keterangan: obat.keterangan,
-        qty_obat: 0,
+        qty_obat: obat.qty_obat,
         satuan_obat: obat.satuan_obat,
         harga_satuan: obat.harga_jual_satuan,
       });

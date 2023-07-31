@@ -35,4 +35,16 @@ export class ObatService {
       ...updateObatDto,
     });
   }
+
+  async updateQty(id: string, qty_out: number) {
+    const obat = await this.obatRepository.findOneBy({ id });
+
+    if (!obat)
+      return new HttpException('obat is not found!', HttpStatus.NOT_FOUND);
+
+    this.obatRepository.save({
+      ...obat,
+      qty_obat: obat.qty_obat - qty_out,
+    });
+  }
 }
