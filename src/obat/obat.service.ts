@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateObatDto } from './dto/create-obat.dto';
 import { UpdateObatDto } from './dto/update-obat.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Obat } from './entities/obat.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ObatService {
+  constructor(
+    @InjectRepository(Obat)
+    private obatRepository: Repository<Obat>,
+  ) {}
+
   create(createObatDto: CreateObatDto) {
-    return 'This action adds a new obat';
+    return this.obatRepository.save({ ...createObatDto });
   }
 
   findAll() {
-    return `This action returns all obat`;
+    return this.obatRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} obat`;
+  findOne(id: string) {
+    return this.obatRepository.findOneBy({ id });
   }
 
-  update(id: number, updateObatDto: UpdateObatDto) {
-    return `This action updates a #${id} obat`;
-  }
+  async update(id: string, updateObatDto: UpdateObatDto) {
+    const obat = await this.obatRepository.findOneBy({ id });
 
-  remove(id: number) {
-    return `This action removes a #${id} obat`;
+    if (!obat)
+      return new HttpException('obat is not found!', HttpStatus.NOT_FOUND);
+
+    this.obatRepository.save({
+      ...obat,
+      ...updateObatDto,
+    });
   }
 }

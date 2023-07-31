@@ -21,7 +21,7 @@ import { Praktek } from './praktek/entities/praktek.entity';
 import { Pasien } from './pasien/entities/pasien.entity';
 import { Admin } from './admin/entities/admin.entity';
 import { Obat } from './obat/entities/obat.entity';
-import { ObatKeluar } from './obat/entities/obatkeluar.entity';
+import { ObatKeluar } from './obatkeluar/entities/obatkeluar.entity';
 import { ObatkeluarModule } from './obatkeluar/obatkeluar.module';
 
 @Module({

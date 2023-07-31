@@ -9,5 +9,6 @@ import { JwtModule } from '@nestjs/jwt';
   imports: [TypeOrmModule.forFeature([Obat]), JwtModule],
   controllers: [ObatController],
   providers: [ObatService],
+  exports: [ObatService],
 })
 export class ObatModule {}

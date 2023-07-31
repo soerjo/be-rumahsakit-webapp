@@ -36,7 +36,10 @@ export class Obat {
   satuan_obat: SatuanObat;
 
   @Column()
-  harga_satuan: number;
+  harga_jual_satuan: number;
+
+  @Column()
+  harga_beli_satuan: number;
 
   @CreateDateColumn()
   created_at: Date;

@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   UseGuards,
 } from '@nestjs/common';
 import { ObatService } from './obat.service';
@@ -30,18 +29,8 @@ export class ObatController {
     return this.obatService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.obatService.findOne(+id);
-  }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateObatDto: UpdateObatDto) {
-    return this.obatService.update(+id, updateObatDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.obatService.remove(+id);
+    return this.obatService.update(id, updateObatDto);
   }
 }
