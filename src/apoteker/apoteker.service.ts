@@ -45,7 +45,7 @@ export class ApotekerService {
     const user = await this.userService.create({
       username: username,
       email: CreateApotekerDto.email,
-      role: Role.DOKTER,
+      role: Role.APOTEKER,
       password: password,
     });
 
@@ -89,7 +89,7 @@ export class ApotekerService {
     const user = await this.userService.update(admin.user.id, {
       username: username,
       email: UpdateApotekerDto.email,
-      role: Role.ADMIN,
+      role: Role.APOTEKER,
       password: password,
     });
 

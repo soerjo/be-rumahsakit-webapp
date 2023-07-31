@@ -89,7 +89,7 @@ export class DokterService {
     const user = await this.userService.update(admin.user.id, {
       username: username,
       email: updateDokterDto.email,
-      role: Role.ADMIN,
+      role: Role.DOKTER,
       password: password,
     });
 

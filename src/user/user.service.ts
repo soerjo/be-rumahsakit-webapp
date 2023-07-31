@@ -20,7 +20,7 @@ export class UserService {
   async findUser(username: string) {
     return await this.usersRepository.findOne({
       where: { username },
-      select: { password: true },
+      select: { password: true, username: true, role: true, id: true },
     });
   }
 

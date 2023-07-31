@@ -29,9 +29,10 @@ export class AuthService {
 
     const user = await this.userService.findUser(username);
     const isPasswordTrue = compareEncryptString(password, user?.password);
-    console.log({ user, isPasswordTrue });
+
     if (!user || !isPasswordTrue) throw new UnauthorizedException();
 
+    console.log({ user });
     const payload = { sub: user.id, username: user.username, role: user.role };
 
     return { access_token: await this.jwtService.signAsync(payload), payload };
