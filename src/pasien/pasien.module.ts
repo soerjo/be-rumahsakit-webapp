@@ -10,5 +10,6 @@ import { PraktekModule } from 'src/praktek/praktek.module';
   imports: [JwtModule, TypeOrmModule.forFeature([Pasien]), PraktekModule],
   controllers: [PasienController],
   providers: [PasienService],
+  exports: [PasienService],
 })
 export class PasienModule {}

@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { ResepService } from './resep.service';
 import { CreateResepDto } from './dto/create-resep.dto';
-import { UpdateResepDto } from './dto/update-resep.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@UseGuards(AuthGuard)
+@ApiBearerAuth()
 @Controller('resep')
 export class ResepController {
   constructor(private readonly resepService: ResepService) {}
@@ -12,23 +15,13 @@ export class ResepController {
     return this.resepService.create(createResepDto);
   }
 
-  @Get()
-  findAll() {
-    return this.resepService.findAll();
-  }
-
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.resepService.findOne(+id);
+  findAll(@Param('id') id: string) {
+    return this.resepService.findAll(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateResepDto: UpdateResepDto) {
-    return this.resepService.update(+id, updateResepDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.resepService.remove(+id);
+  @Get('/approve/:id')
+  approve(@Param('id') id: string) {
+    return this.resepService.approve(id);
   }
 }

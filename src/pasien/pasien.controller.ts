@@ -7,12 +7,13 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { PasienService } from './pasien.service';
 import { CreatePasienDto } from './dto/create-pasien.dto';
 import { UpdatePasienDto } from './dto/update-pasien.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 
 @Controller('pasien')
 @UseGuards(AuthGuard)
@@ -26,14 +27,10 @@ export class PasienController {
   }
 
   @Get()
-  findAll() {
-    return this.pasienService.findAll();
+  @ApiQuery({ name: 'praktek', required: false, type: String })
+  findAll(@Query('praktek') praktek?: string) {
+    return this.pasienService.findAll(praktek);
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.pasienService.findOne(id);
-  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePasienDto: UpdatePasienDto) {

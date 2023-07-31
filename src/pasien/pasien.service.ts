@@ -28,8 +28,20 @@ export class PasienService {
     });
   }
 
-  findAll() {
-    return this.pasienRepository.find({ relations: { praktek: true } });
+  findAll(query?: string) {
+    console.log({ query });
+    if (query) {
+      console.log('execute with query');
+      return this.pasienRepository.find({
+        where: { praktek: { nama_praktek: query } },
+        relations: { praktek: true },
+      });
+    }
+
+    console.log('execute without query');
+    return this.pasienRepository.find({
+      relations: { praktek: true },
+    });
   }
 
   findOne(id: string) {
@@ -37,7 +49,6 @@ export class PasienService {
   }
 
   async update(id: string, updatePasienDto: UpdatePasienDto) {
-    console.log({ updatePasienDto });
     const pasien = await this.pasienRepository.findOne({
       where: { id },
       relations: { praktek: true },

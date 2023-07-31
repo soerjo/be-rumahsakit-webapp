@@ -7,21 +7,21 @@ import { PasienModule } from './pasien/pasien.module';
 import { ObatModule } from './obat/obat.module';
 import { TagihanModule } from './tagihan/tagihan.module';
 import { DokterModule } from './dokter/dokter.module';
+import { ResepModule } from './resep/resep.module';
+import { PraktekModule } from './praktek/praktek.module';
+import { ApotekerModule } from './apoteker/apoteker.module';
+import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 
 import { User } from './user/entities/user.entity';
 import { Dokter } from './dokter/entities/dokter.entity';
-import { ApotekerModule } from './apoteker/apoteker.module';
-import { AdminModule } from './admin/admin.module';
 import { Apoteker } from './apoteker/entities/apoteker.entity';
-import { Resep } from './apoteker/entities/resep.entity';
+import { Resep } from './resep/entities/resep.entity';
 import { Praktek } from './praktek/entities/praktek.entity';
 import { Pasien } from './pasien/entities/pasien.entity';
-import { AuthModule } from './auth/auth.module';
 import { Admin } from './admin/entities/admin.entity';
-import { PraktekModule } from './praktek/praktek.module';
 import { Obat } from './obat/entities/obat.entity';
 import { ObatKeluar } from './obat/entities/obatkeluar.entity';
-import { ResepModule } from './resep/resep.module';
 
 @Module({
   imports: [
