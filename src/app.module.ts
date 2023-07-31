@@ -22,6 +22,7 @@ import { Pasien } from './pasien/entities/pasien.entity';
 import { Admin } from './admin/entities/admin.entity';
 import { Obat } from './obat/entities/obat.entity';
 import { ObatKeluar } from './obat/entities/obatkeluar.entity';
+import { ObatkeluarModule } from './obatkeluar/obatkeluar.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { ObatKeluar } from './obat/entities/obatkeluar.entity';
     AuthModule,
     PraktekModule,
     ResepModule,
+    ObatkeluarModule,
   ],
 })
 export class AppModule {}
