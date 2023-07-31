@@ -23,26 +23,32 @@ Simple hospital web app systems. the main think of this app is to simplify the f
 - get list passien ✅
 - get tagihan passien
 
-| /dokter
+| /dokter ✅
 
 - crud dokter ✅
 - get list passien ✅
 - input praktek dokter ✅
-- input resep obat
-- update data passien ["diagnosa", "tinggi", "berat", "dll"]
+- input resep obat ✅
+- update data passien ["diagnosa", "tinggi", "berat", "dll"] ✅
 
-| /praktek
+| /praktek ✅
 
 - crud praktek ✅
 - get list praktek ✅
 
-| /apoteker
+| /apoteker ✅
 
-- crud apoteker
-- get list req resep obat
+- crud apoteker ✅
+- get list req resep obat ✅
+- approve resep obat ✅
 - input obat_keluar
 
-| /obat
+| /obat✅
 
-- crud obat
-- get list obat
+- crud obat ✅
+- get list obat ✅
+
+| /obatkeluar ✅
+
+- crud obatkeluar ✅
+- get list obatkeluar ✅

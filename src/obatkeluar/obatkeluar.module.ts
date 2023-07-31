@@ -16,5 +16,6 @@ import { ObatModule } from 'src/obat/obat.module';
   ],
   controllers: [ObatkeluarController],
   providers: [ObatkeluarService],
+  exports: [ObatkeluarService],
 })
 export class ObatkeluarModule {}

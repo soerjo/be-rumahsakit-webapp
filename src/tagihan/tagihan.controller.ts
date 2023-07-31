@@ -6,18 +6,23 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { TagihanService } from './tagihan.service';
 import { CreateTagihanDto } from './dto/create-tagihan.dto';
 import { UpdateTagihanDto } from './dto/update-tagihan.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@UseGuards(AuthGuard)
+@ApiBearerAuth()
 @Controller('tagihan')
 export class TagihanController {
   constructor(private readonly tagihanService: TagihanService) {}
 
-  @Post()
-  create(@Body() createTagihanDto: CreateTagihanDto) {
-    return this.tagihanService.create(createTagihanDto);
+  @Post(':id')
+  create(@Param('id') id: string, @Body() createTagihanDto: CreateTagihanDto) {
+    return this.tagihanService.create(id, createTagihanDto);
   }
 
   @Get()
@@ -27,16 +32,6 @@ export class TagihanController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.tagihanService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTagihanDto: UpdateTagihanDto) {
-    return this.tagihanService.update(+id, updateTagihanDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tagihanService.remove(+id);
+    return this.tagihanService.findOne(id);
   }
 }
