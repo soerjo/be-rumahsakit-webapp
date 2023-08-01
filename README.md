@@ -2,6 +2,10 @@
 
 Simple hospital web app systems. the main think of this app is to simplify the flow of the hospital where it fills seamlessly
 
+## Deploy
+
+| aplikasi sudah di up ke server local dengan bantuan ngrok. dokumentasi dan akses swagger dapat di akses malalui: https://6010-180-252-165-0.ngrok-free.app/api
+
 ## Tech
 
 - nestjs
@@ -9,6 +13,7 @@ Simple hospital web app systems. the main think of this app is to simplify the f
 - bcrypt
 - docker
 - postgresql
+- swagger
 
 ## Endpoint
 
@@ -52,3 +57,14 @@ Simple hospital web app systems. the main think of this app is to simplify the f
 
 - crud obatkeluar ✅
 - get list obatkeluar ✅
+
+## how to run
+
+- pastikan tidak ada yang berjalan di port 3000(untuk server be)
+- sudah terinstal docker di komputer
+
+```
+$ docker compose up -d
+```
+
+- app backend akan berjalan di port 3000, database postgre berjalan di atas docker dengan networking antar container.

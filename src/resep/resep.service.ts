@@ -26,7 +26,7 @@ export class ResepService {
       });
     }
 
-    this.resepRepository.save(allResep);
+    return this.resepRepository.save(allResep);
   }
 
   async findAll(userid: string) {

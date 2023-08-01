@@ -6,7 +6,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { SatuanObat } from 'src/obat/entities/obat.entity';
 import { ApiProperty } from '@nestjs/swagger';
 

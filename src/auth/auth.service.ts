@@ -18,6 +18,7 @@ export class AuthService {
       const payload = {
         sub: '00000000',
         username: 'super_root',
+        fullname: 'super root',
         role: 'SUPER_ROOT',
       };
 
@@ -32,7 +33,7 @@ export class AuthService {
 
     if (!user || !isPasswordTrue) throw new UnauthorizedException();
 
-    console.log({ user });
+    // console.log({ user });
     const payload = { sub: user.id, username: user.username, role: user.role };
 
     return { access_token: await this.jwtService.signAsync(payload), payload };

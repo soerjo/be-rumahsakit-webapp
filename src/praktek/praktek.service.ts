@@ -33,7 +33,7 @@ export class PraktekService {
   }
 
   findAll() {
-    return this.praktekRepository.find();
+    return this.praktekRepository.find({ relations: { dokter: true } });
   }
 
   async update(id: string, updatePraktekDto: UpdatePraktekDto) {

@@ -33,16 +33,24 @@ export class Pasien {
   @Column()
   berat_badan?: number;
 
-  @Column()
+  @Column({ default: '' })
   diagnosa?: string;
 
   @ManyToOne(() => Praktek, (praktek) => praktek.id)
   @JoinColumn()
   praktek: Praktek;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(7)',
+    onUpdate: 'CURRENT_TIMESTAMP(7)',
+  })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(7)',
+    onUpdate: 'CURRENT_TIMESTAMP(7)',
+  })
   updated_at: Date;
 }
