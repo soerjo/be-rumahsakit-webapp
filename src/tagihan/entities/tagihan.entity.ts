@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -12,7 +13,7 @@ export class Tagihan {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
-  @ManyToOne(() => Pasien, (pasien) => pasien.id)
+  @OneToOne(() => Pasien, (pasien) => pasien.id)
   @JoinColumn()
   pasien: Pasien;
 

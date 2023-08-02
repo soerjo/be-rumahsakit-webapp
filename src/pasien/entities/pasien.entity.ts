@@ -36,6 +36,12 @@ export class Pasien {
   @Column({ default: '' })
   diagnosa?: string;
 
+  @Column({ default: false })
+  resep_status?: boolean;
+
+  @Column({ default: false })
+  pembayaran_status?: boolean;
+
   @ManyToOne(() => Praktek, (praktek) => praktek.id)
   @JoinColumn()
   praktek: Praktek;

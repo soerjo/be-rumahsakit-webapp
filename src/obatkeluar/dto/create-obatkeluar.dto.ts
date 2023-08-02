@@ -36,7 +36,7 @@ export class ObatKeluarDto {
   @IsString()
   @IsNotEmpty()
   @Transform((o) => o.value.toString().toLocaleLowerCase())
-  id_obat: string;
+  id: string;
 
   @IsNumber()
   @IsNotEmpty()

@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import {
   IsDate,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -46,11 +47,11 @@ export class UpdatePasienDto {
   @ApiProperty({ required: false, example: 56 })
   berat_badan?: number;
 
-  @IsOptional()
   @IsString()
+  @IsNotEmpty()
   @Transform((o) => o.value.toString().toLocaleLowerCase())
-  @ApiProperty({ required: false, example: 'sakit sesuatu...' })
-  diagnosa?: string;
+  @ApiProperty({ required: true, example: 'sakit sesuatu...' })
+  diagnosa: string;
 
   // @IsOptional()
   // @IsString()

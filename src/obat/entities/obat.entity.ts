@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -13,6 +14,7 @@ export enum SatuanObat {
   VIAL = 'VIAL',
 }
 
+@Entity()
 export class Obat {
   @PrimaryGeneratedColumn('uuid')
   id: string;

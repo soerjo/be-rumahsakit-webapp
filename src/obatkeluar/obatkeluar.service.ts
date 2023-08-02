@@ -16,13 +16,14 @@ export class ObatkeluarService {
   ) {}
 
   async create(createObatkeluarDto: CreateObatkeluarDto) {
+    // console.log('obat');
     const pasien = await this.pasienService.findOne(createObatkeluarDto.userid);
     if (!pasien)
       return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
 
     const allResep: ObatKeluar[] = [];
     for (const create_obat_keluar of createObatkeluarDto.item) {
-      const obat = await this.obatService.findOne(create_obat_keluar.id_obat);
+      const obat = await this.obatService.findOne(create_obat_keluar.id);
 
       if (!obat)
         return new HttpException(
@@ -48,7 +49,9 @@ export class ObatkeluarService {
       });
     }
 
-    this.obatkeluarRepository.save(allResep);
+    // console.log({ createObatkeluarDto });
+    this.pasienService.updatePasienResep(createObatkeluarDto.userid, true);
+    return this.obatkeluarRepository.save(allResep);
   }
 
   findAll(userid: string) {

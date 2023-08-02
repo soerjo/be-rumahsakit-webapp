@@ -17,8 +17,10 @@ export class TagihanService {
 
   async create(userid: string, createTagihanDto: CreateTagihanDto) {
     const pasien = await this.pasienService.findOne(userid);
+
     if (!pasien)
       return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
+
     const biaya_dokter = pasien.praktek.biaya;
 
     let biaya_obat = 0;

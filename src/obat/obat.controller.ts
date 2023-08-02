@@ -26,6 +26,7 @@ export class ObatController {
 
   @Get()
   findAll() {
+    // console.log('cari obat');
     return this.obatService.findAll();
   }
 

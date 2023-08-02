@@ -28,6 +28,22 @@ export class PasienService {
     });
   }
 
+  async updatePasienResep(id: string, status = true) {
+    const pasien = await this.pasienRepository.findOne({
+      where: { id },
+      relations: ['praktek', 'praktek.dokter'],
+    });
+
+    if (!pasien)
+      return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
+
+    console.log('update status');
+    return await this.pasienRepository.save({
+      ...pasien,
+      resep_status: status,
+    });
+  }
+
   findAll(query?: string) {
     // console.log({ query });
     if (query) {

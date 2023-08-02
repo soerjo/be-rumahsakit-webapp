@@ -17,7 +17,7 @@ export class ObatService {
   }
 
   findAll() {
-    return this.obatRepository.find();
+    return this.obatRepository.find({ order: { nama_obat: 'ASC' } });
   }
 
   findOne(id: string) {
