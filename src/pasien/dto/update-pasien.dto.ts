@@ -52,9 +52,9 @@ export class UpdatePasienDto {
   @ApiProperty({ required: false, example: 'sakit sesuatu...' })
   diagnosa?: string;
 
-  @IsOptional()
-  @IsString()
-  @Transform((o) => o.value.toString().toLocaleLowerCase())
-  @ApiProperty({ required: false, example: 'konsultasi umum' })
-  praktek: string;
+  // @IsOptional()
+  // @IsString()
+  // @Transform((o) => o.value.toString().toLocaleLowerCase())
+  // @ApiProperty({ required: false, example: 'konsultasi umum' })
+  // praktek: string;
 }

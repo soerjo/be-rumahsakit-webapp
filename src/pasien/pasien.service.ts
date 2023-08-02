@@ -60,20 +60,20 @@ export class PasienService {
     if (!pasien)
       return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
 
-    if (updatePasienDto?.praktek) {
-      const praktek = await this.praktekService.findByName(
-        updatePasienDto.praktek,
-      );
+    // if (updatePasienDto?.praktek) {
+    //   const praktek = await this.praktekService.findByName(
+    //     updatePasienDto.praktek,
+    //   );
 
-      delete updatePasienDto.praktek;
-      return await this.pasienRepository.save({
-        ...pasien,
-        ...updatePasienDto,
-        praktek,
-      });
-    }
+    //   delete updatePasienDto.praktek;
+    //   return await this.pasienRepository.save({
+    //     ...pasien,
+    //     ...updatePasienDto,
+    //     praktek,
+    //   });
+    // }
 
-    delete updatePasienDto.praktek;
+    // delete updatePasienDto.praktek;
     return await this.pasienRepository.save({
       ...pasien,
       ...(updatePasienDto as Omit<UpdatePasienDto, 'praktek'>),
