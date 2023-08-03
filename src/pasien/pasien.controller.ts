@@ -37,6 +37,11 @@ export class PasienController {
     return this.pasienService.findOne(id);
   }
 
+  @Get('bayar/:id')
+  bayar(@Param('id') id: string) {
+    return this.pasienService.updateBayar(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePasienDto: UpdatePasienDto) {
     return this.pasienService.update(id, updatePasienDto);

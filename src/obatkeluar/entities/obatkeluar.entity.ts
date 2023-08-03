@@ -40,6 +40,9 @@ export class ObatKeluar {
   @Column()
   harga_satuan: number;
 
+  @Column({ default: 0 })
+  total_harga: number;
+
   @CreateDateColumn()
   created_at?: Date;
 

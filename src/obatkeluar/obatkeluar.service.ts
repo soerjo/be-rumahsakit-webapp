@@ -46,6 +46,7 @@ export class ObatkeluarService {
         qty_obat: obat.qty_obat,
         satuan_obat: obat.satuan_obat,
         harga_satuan: obat.harga_jual_satuan,
+        total_harga: obat.qty_obat * obat.harga_jual_satuan,
       });
     }
 

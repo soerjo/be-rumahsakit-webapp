@@ -63,7 +63,22 @@ export class PasienService {
   findOne(id: string) {
     return this.pasienRepository.findOne({
       where: { id },
-      relations: { praktek: true },
+      relations: ['praktek', 'praktek.dokter'],
+    });
+  }
+
+  async updateBayar(id: string) {
+    const pasien = await this.pasienRepository.findOne({
+      where: { id },
+      relations: ['praktek', 'praktek.dokter'],
+    });
+
+    if (!pasien)
+      return new HttpException('pasien is not found!', HttpStatus.NOT_FOUND);
+
+    return await this.pasienRepository.save({
+      ...pasien,
+      pembayaran_status: true,
     });
   }
 

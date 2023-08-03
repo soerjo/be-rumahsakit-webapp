@@ -15,7 +15,7 @@ export class ObatkeluarController {
     return this.obatkeluarService.create(createObatkeluarDto);
   }
 
-  @Get()
+  @Get(':id')
   findAll(@Param('id') id: string) {
     return this.obatkeluarService.findAll(id);
   }
